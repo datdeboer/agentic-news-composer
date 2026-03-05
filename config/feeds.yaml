@@ -3,14 +3,14 @@ feeds:
   # Tech news
   - url: https://feeds.arstechnica.com/arstechnica/index
     name: Ars Technica
-  - url: https://www.wired.com/feed/rss
-    name: Wired
-  - url: https://techcrunch.com/feed/
-    name: TechCrunch
-  - url: https://www.theverge.com/rss/index.xml
-    name: The Verge
-  - url: https://feeds.feedburner.com/venturebeat/SZYF
-    name: VentureBeat
+ # - url: https://www.wired.com/feed/rss
+  #  name: Wired
+ # - url: https://techcrunch.com/feed/
+ #   name: TechCrunch
+ # - url: https://www.theverge.com/rss/index.xml
+ #   name: The Verge
+ # - url: https://feeds.feedburner.com/venturebeat/SZYF
+#    name: VentureBeat
 
   # AI / ML
   - url: https://openai.com/blog/rss.xml
@@ -19,11 +19,11 @@ feeds:
     name: DeepMind Blog
 
   # General tech / science
-  - url: https://www.technologyreview.com/feed/
-    name: MIT Technology Review
-  - url: https://www.scientificamerican.com/platform/morgue/collection/news/feed.xml
-    name: Scientific American
+ # - url: https://www.technologyreview.com/feed/
+#    name: MIT Technology Review
+#  - url: https://www.scientificamerican.com/platform/morgue/collection/news/feed.xml
+#    name: Scientific American
 
   # Business / startups
-  - url: https://a16z.com/feed/
-    name: a16z
+#  - url: https://a16z.com/feed/
+#    name: a16z

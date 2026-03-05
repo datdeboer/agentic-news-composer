@@ -26,19 +26,36 @@ def _route_after_review(state: NewsComposerState):
     for each flagged draft (revision cycle).
     """
     feedback = state.get("human_feedback") or []
-    if all(f.get("action") == "approve" for f in feedback):
-        print("[route] All approved → finalize.")
+    print(f"[route] Received feedback: {feedback}", flush=True)
+
+    if not feedback:
+        print("[route] No feedback in state — routing to finalize as fallback.", flush=True)
         return "finalize"
 
     to_revise = {f["style"]: f.get("notes", "") for f in feedback if f.get("action") == "revise"}
+
+    if not to_revise:
+        print("[route] All approved → finalize.", flush=True)
+        return "finalize"
+
     approved_drafts = [
         d for d in state.get("blog_drafts", [])
         if d["style"] not in to_revise
     ]
-    print(f"[route] Revising: {list(to_revise.keys())}")
+    print(f"[route] Revising {list(to_revise.keys())}, keeping {[d['style'] for d in approved_drafts]}", flush=True)
+
+    # Pass only plain state values (no annotated keys) to avoid reducer conflicts in Send
+    plain_state = {
+        "topics": state.get("topics", []),
+        "raw_articles": state.get("raw_articles", []),
+        "top_5_summaries": state.get("top_5_summaries", []),
+        "top_5_links": state.get("top_5_links", []),
+        "human_feedback": state.get("human_feedback"),
+        "finalized": state.get("finalized", False),
+    }
     return [
         Send("rewrite_draft", {
-            **state,
+            **plain_state,
             "draft_style": style,
             "revision_notes": notes,
             "blog_drafts": approved_drafts,
@@ -105,7 +122,7 @@ def build_graph(checkpointer=None):
     graph.add_edge("rewrite_draft", "collect_drafts")
     graph.add_edge("finalize", END)
 
-    return graph.compile(checkpointer=checkpointer, interrupt_before=["human_review"])
+    return graph.compile(checkpointer=checkpointer)
 
 
 def get_checkpointer():

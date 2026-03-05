@@ -27,7 +27,7 @@ def human_review(state: NewsComposerState) -> dict:
         "links": state["top_5_links"],
     })
 
-    print(f"[human_review] Resumed with feedback: {feedback}")
+    print(f"[human_review] Resumed with feedback: {feedback}", flush=True)
     return {"human_feedback": feedback}
 
 
