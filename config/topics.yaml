@@ -1,0 +1,23 @@
+# Topics of interest — articles will be ranked by relevance to these keywords
+topics:
+  - artificial intelligence
+  - AI agents
+ # - open source AI
+ # - machine learning
+ # - large language models
+
+ 
+# Reddit subreddits to monitor for social signals
+reddit_subreddits:
+  - technology
+  - artificial 
+#  - MachineLearning
+#  - worldnews
+#  - programming
+#  - singularity
+
+# Number of top HN stories to pull
+hn_top_n: 1
+
+# Number of top Reddit posts per subreddit
+reddit_top_n: 1
