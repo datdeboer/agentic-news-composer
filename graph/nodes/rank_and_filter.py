@@ -95,7 +95,7 @@ Articles:
 
 
 def _save_articles(articles: list[dict]) -> None:
-    from output.paths import dated_path
+    from graph.paths import dated_path
     path = dated_path("articles")
     lines = ["# Ranked Articles\n"]
     for i, a in enumerate(articles, 1):

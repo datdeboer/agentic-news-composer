@@ -2,7 +2,7 @@
 from datetime import date
 from pathlib import Path
 
-from output.paths import dated_path
+from graph.paths import dated_path
 from graph.state import NewsComposerState
 
 OUTPUT_DIR = Path(__file__).parent.parent.parent / "output"
