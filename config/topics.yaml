@@ -2,9 +2,9 @@
 topics:
   - artificial intelligence
   - AI agents
- # - open source AI
- # - machine learning
- # - large language models
+  - open source AI
+  - machine learning
+  - large language models
 
  
 # Reddit subreddits to monitor for social signals
@@ -17,7 +17,7 @@ reddit_subreddits:
 #  - singularity
 
 # Number of top HN stories to pull
-hn_top_n: 1
+hn_top_n: 5
 
 # Number of top Reddit posts per subreddit
-reddit_top_n: 1
+reddit_top_n: 3
