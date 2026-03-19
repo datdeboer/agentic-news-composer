@@ -22,3 +22,4 @@ class NewsComposerState(TypedDict):
     blog_drafts: Annotated[list[dict], _merge_drafts] # [{style, title, content}, x3]
     human_feedback: dict | None                       # [{style, action: approve|revise, notes}]
     finalized: bool
+    email_sent: bool

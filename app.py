@@ -238,6 +238,16 @@ if st.session_state.graph_status == "done":
     digest_files = sorted(Path("output").glob(f"{today}-*-digest.md"))
     if digest_files:
         st.success(f"Digest finalized! Saved to `{digest_files[-1]}`")
+
+        # Show email status if configured
+        try:
+            config = {"configurable": {"thread_id": st.session_state.thread_id}}
+            snap = st.session_state.graph.get_state(config)
+            if snap and snap.values.get("email_sent"):
+                st.info("📧 Newsletter emailed to recipients.")
+        except Exception:
+            pass
+
         with st.expander("View digest"):
             st.markdown(digest_files[-1].read_text())
         for suffix, label in [("summaries", "summaries"), ("articles", "ranked articles")]:

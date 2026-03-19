@@ -9,6 +9,7 @@ from graph.nodes.compile_links import compile_links
 from graph.nodes.draft_blog_posts import collect_drafts, fan_out_drafts, write_draft
 from graph.nodes.fetch_sources import fetch_sources
 from graph.nodes.finalize import finalize
+from graph.nodes.send_email import send_email
 from graph.nodes.human_review import human_review
 from graph.nodes.rank_and_filter import rank_and_filter
 from graph.nodes.regenerate_drafts import rewrite_draft
@@ -77,7 +78,7 @@ def build_graph(checkpointer=None):
             → collect_drafts
             → human_review  (interrupt)
             → _route_after_review (conditional)
-                "finalize" → finalize → END
+                "finalize" → finalize → send_email → END
                 list[Send] → rewrite_draft → collect_drafts → human_review  (cycle)
     """
     graph = StateGraph(NewsComposerState)
@@ -92,6 +93,7 @@ def build_graph(checkpointer=None):
     graph.add_node("collect_drafts", collect_drafts)
     graph.add_node("human_review", human_review)
     graph.add_node("finalize", finalize)
+    graph.add_node("send_email", send_email)
     graph.add_node("rewrite_draft", rewrite_draft)
 
     # --- Edges ---
@@ -120,7 +122,8 @@ def build_graph(checkpointer=None):
 
     # Revision cycle: rewrite → collect → human_review (loops until all approved)
     graph.add_edge("rewrite_draft", "collect_drafts")
-    graph.add_edge("finalize", END)
+    graph.add_edge("finalize", "send_email")
+    graph.add_edge("send_email", END)
 
     return graph.compile(checkpointer=checkpointer)
 
