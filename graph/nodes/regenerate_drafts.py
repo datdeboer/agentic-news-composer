@@ -2,19 +2,10 @@
 import logging
 import os
 
-from langchain_openai import ChatOpenAI
-
+from graph.llm import get_llm
 from graph.nodes.draft_blog_posts import STYLE_PROMPTS, _build_context
 
 logger = logging.getLogger(__name__)
-
-
-def _get_llm() -> ChatOpenAI:
-    return ChatOpenAI(
-        base_url="https://openrouter.ai/api/v1",
-        api_key=os.environ["OPENROUTER_API_KEY"],
-        model=os.environ.get("OPENROUTER_MODEL", "openai/gpt-4o-mini"),
-    )
 
 
 def rewrite_draft(state: dict) -> dict:
@@ -44,7 +35,7 @@ REVISION REQUEST — the reviewer asked for the following changes:
 Please address these notes in your revised version.
 Return ONLY the revised blog post in markdown format, starting with a # title."""
 
-    llm = _get_llm()
+    llm = get_llm()
     response = llm.invoke(prompt)
     content = response.content.strip()
 

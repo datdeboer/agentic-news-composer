@@ -1,10 +1,10 @@
 # RSS/Atom feeds to fetch articles from
 feeds:
   # Tech news
-  - url: https://feeds.arstechnica.com/arstechnica/index
-    name: Ars Technica
-  - url: https://www.wired.com/feed/rss
-    name: Wired
+ # - url: https://feeds.arstechnica.com/arstechnica/index
+ #   name: Ars Technica
+ # - url: https://www.wired.com/feed/rss
+ #   name: Wired
   - url: https://techcrunch.com/feed/
     name: TechCrunch
   - url: https://www.theverge.com/rss/index.xml
@@ -13,10 +13,10 @@ feeds:
     name: VentureBeat
 
   # AI / ML
-  - url: https://openai.com/blog/rss.xml
-    name: OpenAI Blog
-  - url: https://www.deepmind.com/blog/rss.xml
-    name: DeepMind Blog
+  #- url: https://openai.com/blog/rss.xml
+  #  name: OpenAI Blog
+  #- url: https://www.deepmind.com/blog/rss.xml
+  #  name: DeepMind Blog
 
   # General tech / science
  # - url: https://www.technologyreview.com/feed/

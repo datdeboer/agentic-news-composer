@@ -7,6 +7,8 @@ __pycache__/
 venv/
 *.egg-info/
 .DS_Store
+node_modules/
+frontend/dist/
 docs/pmagent-production-setup.md
 docs/vps-setup-updated.md
 docs/vps-setup.md

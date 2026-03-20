@@ -135,6 +135,9 @@ def get_checkpointer():
     # check_same_thread=False is required — checkpointer is created in the main
     # thread but written to by background threads during graph execution.
     conn = sqlite3.connect(DB_PATH, check_same_thread=False)
+    # WAL mode allows parallel nodes to checkpoint concurrently without
+    # blocking each other — critical for the summarize/compile_links fan-out.
+    conn.execute("PRAGMA journal_mode=WAL")
     return SqliteSaver(conn)
 
 

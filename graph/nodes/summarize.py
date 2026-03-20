@@ -3,19 +3,10 @@ import json
 import logging
 import os
 
-from langchain_openai import ChatOpenAI
-
+from graph.llm import get_llm
 from graph.state import NewsComposerState
 
 logger = logging.getLogger(__name__)
-
-
-def _get_llm() -> ChatOpenAI:
-    return ChatOpenAI(
-        base_url="https://openrouter.ai/api/v1",
-        api_key=os.environ["OPENROUTER_API_KEY"],
-        model=os.environ.get("OPENROUTER_MODEL", "openai/gpt-4o-mini"),
-    )
 
 
 def summarize(state: NewsComposerState) -> dict:
@@ -39,7 +30,7 @@ Use the original title and URL from the article. Do not include any other text.
 Articles:
 {article_text}"""
 
-    llm = _get_llm()
+    llm = get_llm()
     response = llm.invoke(prompt)
     content = response.content.strip()
 

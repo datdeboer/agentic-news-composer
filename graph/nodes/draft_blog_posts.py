@@ -3,9 +3,9 @@ import logging
 import os
 from typing import Any
 
-from langchain_openai import ChatOpenAI
 from langgraph.types import Send
 
+from graph.llm import get_llm
 from graph.state import NewsComposerState
 
 logger = logging.getLogger(__name__)
@@ -28,14 +28,6 @@ Be analytical, include context, implications, and expert perspective.
 Structure: executive summary → background → main analysis → implications → what to watch next.
 Return ONLY the article in markdown format, starting with a # title.""",
 }
-
-
-def _get_llm() -> ChatOpenAI:
-    return ChatOpenAI(
-        base_url="https://openrouter.ai/api/v1",
-        api_key=os.environ["OPENROUTER_API_KEY"],
-        model=os.environ.get("OPENROUTER_MODEL", "openai/gpt-4o-mini"),
-    )
 
 
 def _build_context(state: dict) -> str:
@@ -77,7 +69,7 @@ Here is today's news digest to draw from:
 
 {context}"""
 
-    llm = _get_llm()
+    llm = get_llm()
     response = llm.invoke(prompt)
     content = response.content.strip()
 

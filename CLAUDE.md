@@ -9,7 +9,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Commands
 
 ```bash
-# Install dependencies
+# Install Python dependencies
 pip install -r requirements.txt
 
 # Copy and fill in your API key
@@ -21,16 +21,35 @@ python run.py
 # Run CLI with interactive review
 python run.py --interactive
 
-# Launch Streamlit UI
-streamlit run app.py
+# Start FastAPI backend (port 8000)
+uvicorn api:app --reload
+
+# Install frontend dependencies (first time only)
+cd frontend && npm install
+
+# Start React dev server (port 5173) — proxies /api to :8000
+cd frontend && npm run dev
+
+# Build React app for production
+cd frontend && npm run build
 ```
 
 ## Architecture
 
 ```
 agentic-news-composer/
-├── app.py                        # Streamlit UI entry point
+├── api.py                        # FastAPI backend (SSE streaming, graph runner)
+├── app.py                        # Legacy Streamlit UI (kept for reference)
 ├── run.py                        # Headless CLI runner
+├── frontend/                     # React + Vite + Tailwind frontend
+│   ├── src/
+│   │   ├── App.jsx               # Root component + state machine
+│   │   ├── api.js                # Fetch + SSE helpers
+│   │   └── components/
+│   │       ├── Pipeline.jsx      # Pipeline steps sidebar
+│   │       ├── Digest.jsx        # Summaries + trending links
+│   │       └── ReviewDrafts.jsx  # Human-in-the-loop review UI
+│   └── package.json
 ├── graph/
 │   ├── graph.py                  # LangGraph graph definition + compilation
 │   ├── state.py                  # NewsComposerState TypedDict
@@ -63,7 +82,7 @@ Set `OPENROUTER_API_KEY` and optionally `OPENROUTER_MODEL` (default: `openai/gpt
 - `StateGraph` with `TypedDict` state
 - Parallel edges (summarize + compile_links fan-out after rank_and_filter)
 - `Send` API for dynamic fan-out to 3 draft nodes (map-reduce)
-- `interrupt(value)` — pauses graph, surfaces drafts to Streamlit
+- `interrupt(value)` — pauses graph, surfaces drafts to React UI via SSE
 - `Command(resume=feedback)` — resumes with human feedback
 - Conditional routing via `should_finalize`
 - Revision cycle (loop back to human_review until all drafts approved)
