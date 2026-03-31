@@ -32,6 +32,10 @@ export default function ProviderSelector({ provider, model, onChange, disabled }
   }
 
   return (
+    <div className="space-y-3">
+    <p className="text-xs text-slate-400">
+      Both providers use free tiers with rate limits. If a run fails, wait a few minutes and retry with Groq, or try again tomorrow with OpenRouter.
+    </p>
     <div className="flex items-center gap-3 flex-wrap">
       <div className="flex items-center gap-2">
         <label className="text-sm text-slate-500 whitespace-nowrap">LLM provider</label>
@@ -59,6 +63,7 @@ export default function ProviderSelector({ provider, model, onChange, disabled }
           ))}
         </select>
       </div>
+    </div>
     </div>
   )
 }

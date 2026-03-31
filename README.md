@@ -100,6 +100,8 @@ When all three drafts are ready, the pipeline pauses and presents a tabbed revie
 
 Before starting a run, choose between **OpenRouter** and **Groq** as the LLM provider, and pick a specific model from each provider's list. The selection is applied to the entire run.
 
+> **Note:** Both providers are used on their free tiers, which have rate limits. If a run fails with a rate limit error, wait a few minutes and try again with Groq, or try again the next day with OpenRouter.
+
 ---
 
 ## Stack

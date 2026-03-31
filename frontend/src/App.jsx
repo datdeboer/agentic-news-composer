@@ -185,6 +185,10 @@ export default function App() {
                   {error}
                 </pre>
               )}
+              <p className="text-sm text-red-700 mb-4">
+                Both LLM providers run on free tiers with rate limits. If this looks like a rate limit error,
+                wait a few minutes and retry with <strong>Groq</strong>, or try again tomorrow with <strong>OpenRouter</strong>.
+              </p>
               <button
                 onClick={handleStartRun}
                 className="px-4 py-2 text-sm bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
