@@ -5,12 +5,15 @@ feeds:
  #   name: Ars Technica
  # - url: https://www.wired.com/feed/rss
  #   name: Wired
-  - url: https://techcrunch.com/feed/
-    name: TechCrunch
-  - url: https://www.theverge.com/rss/index.xml
-    name: The Verge
-  - url: https://feeds.feedburner.com/venturebeat/SZYF
-    name: VentureBeat
+  - url: https://claude.com/blog/category/announcements
+    name: Claude Product Announcements
+  - url: https://claude.com/blog/category/agents
+    name: Claude Agent News
+  - url: https://claude.com/blog/category/claude-code
+    name: Claude Code News
+  - url: https://claude.com/blog/category/enterprise-ai
+    name: Claude Enterprise AI News
+
 
   # AI / ML
   #- url: https://openai.com/blog/rss.xml
